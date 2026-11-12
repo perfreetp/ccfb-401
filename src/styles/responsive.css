@@ -1,0 +1,237 @@
+.batch-arena { overflow-x: auto; }
+.batch-table-head, .batch-table-row { min-width: 520px; }
+.rating-text { color: var(--dim); }
+.command-side { overflow-y: auto; }
+.command-units { min-height: 0; }
+.selected-unit { min-height: 0; }
+
+@media (max-width: 1460px) {
+  .deployment-grid { grid-template-columns: 250px minmax(0, 1fr) 300px; }
+  .command-grid { grid-template-columns: 232px minmax(0, 1fr) 306px; }
+  .campaign-layout { grid-template-columns: minmax(0, 1fr) 345px; }
+  .field-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .report-stat-grid { grid-template-columns: repeat(3, 1fr); }
+  .review-report-layout { grid-template-columns: 208px minmax(0, 1fr); }
+}
+
+@media (max-width: 1240px) {
+  .sidebar { width: 210px; flex-basis: 210px; }
+  .brand-copy strong { font-size: 15px; }
+  .campaign-layout { grid-template-columns: minmax(0, 1fr) 325px; }
+  .deployment-grid { grid-template-columns: 235px minmax(0, 1fr) 285px; }
+  .command-grid { grid-template-columns: 215px minmax(0, 1fr) 288px; }
+  .command-status { min-width: 170px; }
+  .time-progress { width: 70px; }
+  .page-heading h1 { font-size: 30px; }
+  .review-head-summary { gap: 16px; }
+  .batch-layout { grid-template-columns: 340px minmax(0, 1fr); }
+  .land-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Compact top navigation on narrow desktops and tablets. */
+@media (max-width: 1100px) {
+  #app { height: auto; min-height: 100vh; }
+  body { overflow-y: auto; overflow-x: hidden; }
+  .app-shell { flex-direction: column; height: auto; min-height: 100vh; }
+  .sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 13px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 12px;
+    backdrop-filter: blur(14px);
+    background: rgba(11, 15, 10, .93);
+  }
+  .brand { padding: 0; flex: 0 0 auto; gap: 8px; }
+  .brand-mark { width: 32px; height: 32px; }
+  .brand-copy strong { font-size: 14px; }
+  .brand-copy small { display: none; }
+  .sidebar-label, .side-mission, .sidebar-foot { display: none; }
+  .main-nav { flex: 1; flex-direction: row; overflow-x: auto; gap: 2px; justify-content: center; }
+  .nav-item { width: auto; flex: 0 0 auto; padding: 7px 9px; }
+  .nav-index { display: none; }
+  .nav-icon { width: 18px; }
+  .nav-copy small { display: none; }
+  .nav-copy b { font-size: 11px; }
+  .nav-arrow { display: none; }
+  .nav-item.active::before { top: auto; bottom: -1px; left: 7px; right: 7px; width: auto; height: 2px; }
+  .workspace { height: auto; min-height: calc(100vh - 50px); }
+  .topbar { position: sticky; top: 50px; height: 48px; flex-basis: 48px; padding: 0 15px; }
+  .screen-host { overflow: visible; }
+  .screen-inner { padding: 16px; }
+  .command-screen { height: auto; min-height: calc(100vh - 100px); }
+  .command-grid { grid-template-columns: 228px minmax(0, 1fr); flex: none; height: calc(100vh - 180px); min-height: 620px; }
+  .command-side { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1.2fr; overflow: visible; align-items: stretch; }
+  .event-log-panel { min-height: 260px; }
+  .selected-unit { max-height: 380px; }
+  .campaign-layout { grid-template-columns: 1fr; }
+  .campaign-board { min-height: 500px; }
+  .mission-dossier { max-height: none; }
+  .review-visual-grid { grid-template-columns: 1fr; }
+  .review-report-layout { grid-template-columns: 1fr; }
+  .archive-panel { position: static; max-height: 300px; }
+  .archive-records { max-height: 210px; }
+  .batch-layout { grid-template-columns: 1fr; }
+  .batch-arena { min-height: 380px; }
+  .batch-arena-empty { min-height: 360px; }
+  .config-layout { grid-template-columns: 1fr; }
+  .config-nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding-bottom: 0; }
+  .config-nav-item { border-left: 0; border-bottom: 2px solid transparent; padding: 8px; gap: 5px; }
+  .config-nav-item.active { border-left: 0; border-bottom-color: var(--accent); background: rgba(224,164,75,.045); }
+  .config-nav-item span:nth-child(2) small { display: none; }
+  .config-nav-item > .icon, .config-version-card { display: none; }
+  .config-nav-item b { font-size: 10px; }
+  .cn-icon { width: auto; }
+  .config-main { max-height: none; }
+}
+
+@media (max-width: 900px) {
+  .page-heading, .config-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .heading-stats { padding-bottom: 0; gap: 18px; }
+  .campaign-board { min-height: 440px; }
+  .board-legend { display: none; }
+  .campaign-footer { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .footer-actions { gap: 10px; }
+  .deployment-grid { grid-template-columns: 1fr; }
+  .deployment-palette { order: 2; }
+  .deployment-map-panel { order: 1; }
+  .deployment-right { order: 3; display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
+  .dispatch-panel { grid-column: 1 / -1; max-height: 340px; }
+  .objective-panel { min-height: 100%; }
+  .template-panel { min-height: 100%; }
+  .deployment-map-wrap { min-height: 460px; }
+  .mission-strip { grid-template-columns: 1fr; grid-template-areas: "left" "right" "meta"; gap: 10px; }
+  .mission-strip-right { justify-content: space-between; flex-wrap: wrap; width: 100%; }
+  .budget-widget { flex: 1; min-width: 150px; }
+  .portrait .command-grid { grid-template-columns: 1fr; }
+  .report-visual-grid { grid-template-columns: 1fr; }
+  .report-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .report-lower-grid { grid-template-columns: 1fr; }
+  .review-head-summary { flex-wrap: wrap; gap: 12px 18px; }
+  .review-report-layout { grid-template-columns: 1fr; }
+  .review-map-host { height: 250px; }
+  .field-grid { grid-template-columns: 1fr 1fr; }
+  .land-grid { grid-template-columns: 1fr 1fr; }
+  .save-grid { grid-template-columns: 1fr; }
+  .save-hero { flex-wrap: wrap; }
+  .save-hero-stats { margin-left: auto; }
+}
+
+@media (max-width: 760px) {
+  .sidebar { flex-wrap: nowrap; gap: 4px; padding: 7px 9px; }
+  .main-nav { order: initial; width: auto; flex: 1; justify-content: flex-end; overflow-x: auto; }
+  .brand { margin-right: 2px; gap: 6px; }
+  .brand-mark { width: 29px; height: 29px; }
+  .brand-copy strong { font-size: 12px; letter-spacing: .09em; }
+  .nav-item { padding: 4px 6px; gap: 0; flex-direction: column; align-items: center; }
+  .nav-icon { width: auto; }
+  .nav-icon .icon { width: 15px; height: 15px; }
+  .nav-copy { align-items: center; flex: 0 0 auto; }
+  .nav-copy b { font-size: 8px; font-weight: 400; letter-spacing: 0; white-space: nowrap; }
+  .nav-item.active::before { left: 3px; right: 3px; bottom: 0; }
+  .topbar { top: 43px; padding: 0 12px; }
+  .topbar { height: 44px; flex-basis: 44px; }
+  .crumb-parent, .crumb-sep, #topbar-sub, .cfg-pill, .clock-pill { display: none; }
+  .topbar-right { margin-left: auto; }
+  .topbar-btn { padding: 6px 8px; }
+  .screen-inner { padding: 12px; }
+  .page-heading h1, .review-title h1, .config-head h1 { font-size: 24px; }
+  .page-lead { font-size: 11px; }
+  .heading-stats { width: 100%; justify-content: space-between; gap: 10px; }
+  .stat-value { font-size: 21px; }
+  .campaign-board { min-height: 380px; }
+  .mission-node .node-caption { transform: scale(.88); }
+  .node-ring { width: 44px; height: 44px; }
+  .mission-dossier { padding: 15px; }
+  .dossier-top h2 { font-size: 24px; }
+  .dossier-metrics { grid-template-columns: 1fr 1fr; }
+  .mission-strip-right { align-items: stretch; }
+  .mission-strip-right .btn { flex: 1; }
+  .budget-widget { width: 100%; flex-basis: 100%; }
+  .deployment-right { grid-template-columns: 1fr; }
+  .deployment-map-wrap { min-height: 380px; }
+  .map-bottomline { flex-wrap: wrap; }
+  .command-topbar { gap: 8px; }
+  .command-title { width: 100%; justify-content: space-between; }
+  .ops-sub { display: none; }
+  .command-status { order: 3; width: 100%; justify-content: space-between; min-width: auto; }
+  .command-controls { order: 2; margin-left: auto; }
+  .command-grid { grid-template-columns: 1fr; height: auto; min-height: 0; }
+  .command-map-panel { min-height: 62vh; }
+  .command-units { max-height: 520px; }
+  .command-side { grid-template-columns: 1fr; }
+  .map-tool-panel { bottom: 38px; }
+  .tool-btn span { display: none; }
+  .tool-btn kbd { display: none; }
+  .tool-btn { padding: 9px 11px; }
+  .tool-hint { bottom: 12px; max-width: 86%; text-align: center; }
+  .command-map-bottom { display: none; }
+  .alert-stack { top: 56px; }
+  .alert-copy span { white-space: normal; }
+  .map-live-title b { max-width: 150px; }
+  .briefing-card { padding: 16px; }
+  .briefing-grid { grid-template-columns: 1fr 1fr; }
+  .briefing-head h2 { font-size: 20px; }
+  .result-card { padding: 18px; }
+  .result-card h2 { font-size: 24px; }
+  .result-metrics { grid-template-columns: 1fr 1fr; }
+  .report-banner { flex-wrap: wrap; gap: 12px; }
+  .banner-rating { flex: 1 0 100%; border-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 8px; flex-direction: row; align-items: center; gap: 12px; }
+  .banner-actions { flex-direction: row; width: 100%; }
+  .banner-actions .btn { flex: 1; }
+  .report-stat-grid { grid-template-columns: 1fr 1fr; }
+  .review-map-host { height: 220px; }
+  .chart-wrap { min-height: 190px; }
+  .line-chart { min-height: 180px; }
+  .tab-switcher { width: 100%; overflow-x: auto; }
+  .tab-button { flex: 1; justify-content: center; padding: 8px 8px; white-space: nowrap; }
+  .batch-fields { grid-template-columns: 1fr; }
+  .batch-result-head { flex-direction: column; gap: 9px; }
+  .best-plan { text-align: left; }
+  .batch-table-head, .batch-table-row { padding: 7px 12px; gap: 7px; }
+  .batch-table-head, .batch-table-row { min-width: 470px; }
+  .batch-distribution { padding: 12px; }
+  .config-nav { grid-template-columns: repeat(3, 1fr); }
+  .field-grid { grid-template-columns: 1fr; }
+  .land-grid { grid-template-columns: 1fr; }
+  .config-head-actions { width: 100%; }
+  .config-save-state { flex: 1; }
+  .config-notice { align-items: flex-start; }
+  .field-group { padding: 13px; }
+  .json-editor-wrap { margin: 12px; }
+  #json-editor { min-height: 440px; font-size: 9px; }
+  .save-actions .btn { justify-content: center; }
+  .toast-host { right: 10px; bottom: 10px; left: 10px; align-items: stretch; }
+  .toast { max-width: none; min-width: 0; }
+  .modal-layer { padding: 10px; }
+  .save-modal { padding: 16px; }
+  .save-hero-stats { width: 100%; justify-content: space-between; }
+  .save-hero-stats div { align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .heading-stats { flex-wrap: wrap; }
+  .mission-strip-meta { gap: 9px; }
+  .dossier-metrics { grid-template-columns: 1fr 1fr; }
+  .report-stat-grid { grid-template-columns: 1fr 1fr; }
+  .report-stat b { font-size: 18px; }
+  .map-hud-wind { top: 8px; right: 8px; }
+  .map-hud-fire { top: 8px; left: 8px; }
+  .map-hud { padding: 5px 7px; }
+  .map-coordinates-bottom { display: none; }
+  .command-map-top { top: 8px; left: 8px; right: 8px; }
+  .command-map-top .map-live-title { max-width: 190px; }
+  .result-actions .btn { flex: 1 0 100%; }
+  .save-info-row { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .command-controls { gap: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

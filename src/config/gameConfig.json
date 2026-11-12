@@ -1,0 +1,836 @@
+{
+  "meta": {
+    "configVersion": 1,
+    "title": "林火前线",
+    "cellSizeMeters": 60
+  },
+  "world": {
+    "mapNoiseScale": 0.09,
+    "detailNoiseScale": 0.24,
+    "cliffSlopeThreshold": 0.62,
+    "ridgeElevation": 175,
+    "lakeShoreFalloff": 0.18,
+    "roadSpeedFactor": 1.35,
+    "baseRadiusCells": 6,
+    "deploymentMinFireDistance": 8,
+    "deploymentMinEdgeDistance": 1
+  },
+  "fire": {
+    "spreadIntervalSec": 0.9,
+    "baseSpreadChance": 0.075,
+    "windAlignmentPower": 2.15,
+    "windDownwindFloor": 0.06,
+    "windSpeedFactorPerMs": 0.085,
+    "slopeFactorPerMeter": 0.0125,
+    "maxSlopeFactor": 2.4,
+    "humiditySensitivity": 0.0082,
+    "temperatureFactorPerDegree": 0.0024,
+    "moistureExponent": 0.82,
+    "burnDurationSec": 31,
+    "intensityGrowthPerSec": 0.075,
+    "maxSpreadChancePerNeighbor": 0.82,
+    "fuelFactorFloor": 0.3,
+    "humidityFactorFloor": 0.2,
+    "slopeFactorFloor": 0.25,
+    "initialIgnitionRadiusCells": 1.15,
+    "initialIgnitionIntensity": 0.72,
+    "spotting": {
+      "minWindSpeed": 7.5,
+      "chancePerBurningCellPerSec": 0.0011,
+      "maxDistanceCells": 4,
+      "intensityThreshold": 0.5
+    },
+    "backfireSpreadMultiplier": 0.62,
+    "firebreakBlockChance": 1,
+    "burnedFuelLoss": 0.98
+  },
+  "suppression": {
+    "extinguishIntensity": 0.035,
+    "wettedMoisture": 0.48,
+    "wetnessDryRatePerSec": 0.009,
+    "truckWetRadius": 1,
+    "helicopterDropRadius": 2.25,
+    "helicopterDropIntensityCut": 1.05,
+    "helicopterDropWetness": 0.8,
+    "firebreakProgressPerSec": 1.0,
+    "minFirebreakProgress": 0.01,
+    "sprayEfficiency": 1
+  },
+  "behavior": {
+    "pathReplanSec": 2.4,
+    "detectionRadiusCells": 9,
+    "dangerRadiusCells": 1.7,
+    "lowWaterThreshold": 0.2,
+    "resupplyDwellSec": 1.6,
+    "distressCooldownSec": 16,
+    "trappedFireRadius": 2,
+    "unsafeFireRadius": 0.65,
+    "safeSearchRadiusCells": 9,
+    "autoBreakLookAheadCells": 5,
+    "autoBreakMaxCells": 8,
+    "retreatCooldownSec": 9,
+    "lostAfterDistressSec": 75,
+    "heliMinDropIntensity": 0.3,
+    "heliTargetClusterRadius": 2,
+    "unitIdleRadiusCells": 4,
+    "backfireCrewRadiusCells": 7
+  },
+  "units": {
+    "ground": {
+      "name": "地面扑火队",
+      "shortName": "扑火队",
+      "role": "DIRT / GROUND",
+      "cost": 14,
+      "speedCellsPerSec": 0.72,
+      "waterCapacity": 96,
+      "sprayRate": 4.2,
+      "suppressPower": 0.22,
+      "sprayRange": 1.15,
+      "detectionRadius": 8,
+      "digRate": 0.15,
+      "canDig": true,
+      "canSpray": true,
+      "canFly": false,
+      "maxCount": 12,
+      "color": "#d9ad5b",
+      "description": "携水背具与工具，可抵近扑救、开挖隔离带；速度慢，需避开火线与断崖。"
+    },
+    "tender": {
+      "name": "水罐消防车",
+      "shortName": "水罐车",
+      "role": "WATER / SURFACE",
+      "cost": 27,
+      "speedCellsPerSec": 0.48,
+      "waterCapacity": 2600,
+      "sprayRate": 18,
+      "suppressPower": 0.34,
+      "sprayRange": 2.05,
+      "detectionRadius": 11,
+      "digRate": 0,
+      "canDig": false,
+      "canSpray": true,
+      "canFly": false,
+      "maxCount": 6,
+      "color": "#6fc3d8",
+      "description": "大载水量、中距离压制火头；机动慢，沿道路速度更快。不能开挖隔离带。"
+    },
+    "helicopter": {
+      "name": "救援直升机",
+      "shortName": "直升机",
+      "role": "AIR / BUCKET",
+      "cost": 39,
+      "speedCellsPerSec": 1.55,
+      "waterCapacity": 1200,
+      "bucketSize": 700,
+      "dropCooldownSec": 9,
+      "detectionRadius": 15,
+      "digRate": 0,
+      "canDig": false,
+      "canSpray": true,
+      "canFly": true,
+      "maxCount": 4,
+      "color": "#e7d8a4",
+      "description": "越过断崖与火线快速吊桶投水；载量有限，需往返水域补水。"
+    }
+  },
+  "vegetation": {
+    "grass": {
+      "name": "禾草",
+      "fuel": 0.34,
+      "spread": 1.42,
+      "moisture": 0.13,
+      "color": "#a8ab68",
+      "burnColor": "#2f2d24"
+    },
+    "shrub": {
+      "name": "灌木",
+      "fuel": 0.56,
+      "spread": 1.16,
+      "moisture": 0.17,
+      "color": "#7d8f55",
+      "burnColor": "#332a23"
+    },
+    "pine": {
+      "name": "针叶林",
+      "fuel": 0.86,
+      "spread": 0.98,
+      "moisture": 0.19,
+      "color": "#4f714b",
+      "burnColor": "#29241e"
+    },
+    "mixed": {
+      "name": "混交林",
+      "fuel": 0.7,
+      "spread": 0.9,
+      "moisture": 0.23,
+      "color": "#63805a",
+      "burnColor": "#2b2821"
+    },
+    "wetland": {
+      "name": "湿地草甸",
+      "fuel": 0.24,
+      "spread": 0.48,
+      "moisture": 0.44,
+      "color": "#7e926a",
+      "burnColor": "#2f3129"
+    },
+    "none": {
+      "name": "无燃料",
+      "fuel": 0,
+      "spread": 0,
+      "moisture": 1,
+      "color": "#616a67",
+      "burnColor": "#333836"
+    }
+  },
+  "terrain": {
+    "plain": {
+      "name": "缓坡",
+      "color": "#6f7d5d",
+      "passable": true,
+      "waterSource": false,
+      "speedFactor": 1,
+      "heightTint": 0.12
+    },
+    "ridge": {
+      "name": "山脊",
+      "color": "#7c7a5e",
+      "passable": true,
+      "waterSource": false,
+      "speedFactor": 0.8,
+      "heightTint": 0.24
+    },
+    "cliff": {
+      "name": "断崖",
+      "color": "#5a5d58",
+      "passable": false,
+      "waterSource": false,
+      "speedFactor": 0,
+      "heightTint": 0.36
+    },
+    "water": {
+      "name": "水域",
+      "color": "#284852",
+      "passable": false,
+      "waterSource": true,
+      "speedFactor": 0,
+      "heightTint": 0
+    },
+    "road": {
+      "name": "林区道路",
+      "color": "#8b846c",
+      "passable": true,
+      "waterSource": false,
+      "speedFactor": 1.35,
+      "heightTint": 0.08
+    },
+    "base": {
+      "name": "前进基地",
+      "color": "#81755f",
+      "passable": true,
+      "waterSource": true,
+      "speedFactor": 1.2,
+      "heightTint": 0.05
+    }
+  },
+  "rating": {
+    "threeStarBurnRatio": 0.52,
+    "twoStarBurnRatio": 1,
+    "passBurnRatio": 1.35,
+    "threeStarRequiresAllAssets": true,
+    "containmentStabilitySec": 12,
+    "assetLossFailRatio": 1
+  },
+  "batch": {
+    "defaultRuns": 60,
+    "maxRuns": 400,
+    "tickSeconds": 1,
+    "timeoutGuardSec": 900
+  },
+  "scenarios": [
+    {
+      "id": "qingsongling",
+      "code": "OP-01",
+      "name": "青松岭",
+      "subtitle": "午后初起 · 西南风",
+      "difficulty": 1,
+      "seed": 40117,
+      "cols": 46,
+      "rows": 30,
+      "base": {
+        "x": 10,
+        "y": 24
+      },
+      "ignition": {
+        "x": 29,
+        "y": 15
+      },
+      "lakes": [
+        {
+          "x": 13,
+          "y": 9,
+          "rx": 5,
+          "ry": 3.2
+        },
+        {
+          "x": 36,
+          "y": 26,
+          "rx": 4,
+          "ry": 2.2
+        }
+      ],
+      "cliffs": [
+        {
+          "x": 23,
+          "y": 5,
+          "rx": 9,
+          "ry": 2.1
+        },
+        {
+          "x": 39,
+          "y": 12,
+          "rx": 3,
+          "ry": 4
+        }
+      ],
+      "assets": [
+        {
+          "id": "tower",
+          "name": "防火瞭望塔",
+          "kind": "tower",
+          "x": 22,
+          "y": 8
+        },
+        {
+          "id": "camp",
+          "name": "护林营地",
+          "kind": "camp",
+          "x": 35,
+          "y": 9
+        },
+        {
+          "id": "village",
+          "name": "山脚村落",
+          "kind": "village",
+          "x": 19,
+          "y": 26
+        }
+      ],
+      "budget": 88,
+      "durationSec": 300,
+      "fuelMoistureOffset": 0.02,
+      "weather": {
+        "fromDeg": 238,
+        "speed": 4.2,
+        "humidity": 38,
+        "temperature": 28
+      },
+      "windEvents": [
+        {
+          "atSec": 115,
+          "fromDeg": 306,
+          "speed": 7.8,
+          "transitionSec": 14,
+          "warnSec": 22,
+          "label": "西北阵风前沿抵达"
+        },
+        {
+          "atSec": 228,
+          "fromDeg": 262,
+          "speed": 5.1,
+          "transitionSec": 20,
+          "warnSec": 18,
+          "label": "山谷风回转"
+        }
+      ],
+      "maxBurnedHa": 96,
+      "briefing": "火点位于东南侧针叶林，西南风推动火头向东北扩展。护林营地与瞭望塔处于下风向，必须在山脊前完成拦截。",
+      "objective": "控制过火面积，保护三处设施，并利用湖区与既有道路完成首次联合扑救。"
+    },
+    {
+      "id": "yingzuiai",
+      "code": "OP-02",
+      "name": "鹰嘴崖",
+      "subtitle": "断崖地形 · 风道加速",
+      "difficulty": 2,
+      "seed": 40209,
+      "cols": 50,
+      "rows": 32,
+      "base": {
+        "x": 8,
+        "y": 27
+      },
+      "ignition": {
+        "x": 32,
+        "y": 13
+      },
+      "lakes": [
+        {
+          "x": 18,
+          "y": 27,
+          "rx": 6,
+          "ry": 2.6
+        }
+      ],
+      "cliffs": [
+        {
+          "x": 23,
+          "y": 10,
+          "rx": 10,
+          "ry": 1.5
+        },
+        {
+          "x": 40,
+          "y": 20,
+          "rx": 2.2,
+          "ry": 7
+        },
+        {
+          "x": 15,
+          "y": 4,
+          "rx": 8,
+          "ry": 1.3
+        }
+      ],
+      "assets": [
+        {
+          "id": "relay",
+          "name": "中继站",
+          "kind": "tower",
+          "x": 39,
+          "y": 11
+        },
+        {
+          "id": "station",
+          "name": "林场站",
+          "kind": "camp",
+          "x": 27,
+          "y": 27
+        },
+        {
+          "id": "bridge",
+          "name": "鹰嘴桥",
+          "kind": "bridge",
+          "x": 9,
+          "y": 17
+        }
+      ],
+      "budget": 112,
+      "durationSec": 330,
+      "fuelMoistureOffset": -0.015,
+      "weather": {
+        "fromDeg": 252,
+        "speed": 6.4,
+        "humidity": 31,
+        "temperature": 31
+      },
+      "windEvents": [
+        {
+          "atSec": 92,
+          "fromDeg": 292,
+          "speed": 11.2,
+          "transitionSec": 9,
+          "warnSec": 18,
+          "label": "峡谷风道加压"
+        },
+        {
+          "atSec": 205,
+          "fromDeg": 218,
+          "speed": 7.5,
+          "transitionSec": 16,
+          "warnSec": 16,
+          "label": "风向折返"
+        },
+        {
+          "atSec": 285,
+          "fromDeg": 268,
+          "speed": 9.4,
+          "transitionSec": 7,
+          "warnSec": 14,
+          "label": "强阵风过境"
+        }
+      ],
+      "maxBurnedHa": 128,
+      "briefing": "鹰嘴崖断崖切断了地面捷径，火线沿崖顶向中继站推进。峡谷会放大风速，直升机是跨越断崖的唯一快速增援。",
+      "objective": "守住中继站与林场站。利用断崖天然阻火带，避免队伍进入峡谷风道。"
+    },
+    {
+      "id": "nanpolinchang",
+      "code": "OP-03",
+      "name": "南坡林场",
+      "subtitle": "夜间火 · 干燥针叶林",
+      "difficulty": 2,
+      "seed": 40303,
+      "cols": 54,
+      "rows": 33,
+      "base": {
+        "x": 12,
+        "y": 28
+      },
+      "ignition": {
+        "x": 33,
+        "y": 19
+      },
+      "lakes": [
+        {
+          "x": 8,
+          "y": 24,
+          "rx": 3.4,
+          "ry": 2.4
+        },
+        {
+          "x": 44,
+          "y": 29,
+          "rx": 5,
+          "ry": 1.8
+        }
+      ],
+      "cliffs": [
+        {
+          "x": 24,
+          "y": 12,
+          "rx": 12,
+          "ry": 1.6
+        },
+        {
+          "x": 47,
+          "y": 9,
+          "rx": 3,
+          "ry": 6
+        }
+      ],
+      "assets": [
+        {
+          "id": "seedling",
+          "name": "育苗圃",
+          "kind": "village",
+          "x": 17,
+          "y": 23
+        },
+        {
+          "id": "depot",
+          "name": "木材仓",
+          "kind": "camp",
+          "x": 30,
+          "y": 28
+        },
+        {
+          "id": "station",
+          "name": "南坡站",
+          "kind": "tower",
+          "x": 42,
+          "y": 22
+        }
+      ],
+      "budget": 126,
+      "durationSec": 360,
+      "fuelMoistureOffset": -0.045,
+      "weather": {
+        "fromDeg": 226,
+        "speed": 5.6,
+        "humidity": 24,
+        "temperature": 33
+      },
+      "windEvents": [
+        {
+          "atSec": 76,
+          "fromDeg": 305,
+          "speed": 10.6,
+          "transitionSec": 12,
+          "warnSec": 20,
+          "label": "夜间下坡风转西北"
+        },
+        {
+          "atSec": 188,
+          "fromDeg": 192,
+          "speed": 8.2,
+          "transitionSec": 11,
+          "warnSec": 14,
+          "label": "冷空气回流"
+        },
+        {
+          "atSec": 300,
+          "fromDeg": 248,
+          "speed": 6.3,
+          "transitionSec": 19,
+          "warnSec": 24,
+          "label": "风向缓慢摆正"
+        }
+      ],
+      "maxBurnedHa": 150,
+      "briefing": "连续干旱使针叶林含水率极低，夜间逆温层让火线更难判断。育苗圃与木材仓相邻，必须优先建立隔离带。",
+      "objective": "在低湿度和连续转向中守住三处资产，控制火势不越过林场道路。"
+    },
+    {
+      "id": "shuanghe",
+      "code": "OP-04",
+      "name": "双河",
+      "subtitle": "水源争夺 · 双线火",
+      "difficulty": 3,
+      "seed": 40411,
+      "cols": 56,
+      "rows": 34,
+      "base": {
+        "x": 9,
+        "y": 28
+      },
+      "ignition": {
+        "x": 31,
+        "y": 12
+      },
+      "lakes": [
+        {
+          "x": 15,
+          "y": 17,
+          "rx": 3,
+          "ry": 9
+        },
+        {
+          "x": 43,
+          "y": 24,
+          "rx": 8,
+          "ry": 2.2
+        },
+        {
+          "x": 49,
+          "y": 7,
+          "rx": 2.5,
+          "ry": 4
+        }
+      ],
+      "cliffs": [
+        {
+          "x": 27,
+          "y": 5,
+          "rx": 7,
+          "ry": 1.6
+        },
+        {
+          "x": 38,
+          "y": 18,
+          "rx": 3,
+          "ry": 2.8
+        }
+      ],
+      "assets": [
+        {
+          "id": "pump",
+          "name": "双河泵站",
+          "kind": "camp",
+          "x": 22,
+          "y": 25
+        },
+        {
+          "id": "village",
+          "name": "河湾村",
+          "kind": "village",
+          "x": 35,
+          "y": 28
+        },
+        {
+          "id": "bridge",
+          "name": "老桥",
+          "kind": "bridge",
+          "x": 34,
+          "y": 22
+        },
+        {
+          "id": "tower",
+          "name": "东河瞭望塔",
+          "kind": "tower",
+          "x": 51,
+          "y": 15
+        }
+      ],
+      "budget": 148,
+      "durationSec": 390,
+      "fuelMoistureOffset": -0.02,
+      "weather": {
+        "fromDeg": 244,
+        "speed": 6.8,
+        "humidity": 29,
+        "temperature": 32
+      },
+      "windEvents": [
+        {
+          "atSec": 68,
+          "fromDeg": 312,
+          "speed": 12.5,
+          "transitionSec": 8,
+          "warnSec": 20,
+          "label": "主风道突变"
+        },
+        {
+          "atSec": 165,
+          "fromDeg": 205,
+          "speed": 8.4,
+          "transitionSec": 13,
+          "warnSec": 16,
+          "label": "河谷风反转"
+        },
+        {
+          "atSec": 253,
+          "fromDeg": 285,
+          "speed": 11.1,
+          "transitionSec": 9,
+          "warnSec": 15,
+          "label": "第二段阵风"
+        },
+        {
+          "atSec": 332,
+          "fromDeg": 232,
+          "speed": 6.5,
+          "transitionSec": 22,
+          "warnSec": 18,
+          "label": "风场减弱"
+        }
+      ],
+      "maxBurnedHa": 185,
+      "briefing": "双河水库把战场切成东西两段。火线可能在强阵风下跨过现有道路，形成第二火头。泵站是补水命脉，失去它将拖垮所有地面单位。",
+      "objective": "保护双河泵站，维持补水链条，阻止火势越过河湾村。"
+    },
+    {
+      "id": "heifengkou",
+      "code": "OP-05",
+      "name": "黑风口",
+      "subtitle": "极端风变 · 最终战役",
+      "difficulty": 4,
+      "seed": 40507,
+      "cols": 58,
+      "rows": 36,
+      "base": {
+        "x": 9,
+        "y": 31
+      },
+      "ignition": {
+        "x": 33,
+        "y": 17
+      },
+      "lakes": [
+        {
+          "x": 11,
+          "y": 24,
+          "rx": 5,
+          "ry": 3.2
+        },
+        {
+          "x": 48,
+          "y": 29,
+          "rx": 4,
+          "ry": 2.4
+        }
+      ],
+      "cliffs": [
+        {
+          "x": 20,
+          "y": 12,
+          "rx": 8,
+          "ry": 2
+        },
+        {
+          "x": 40,
+          "y": 8,
+          "rx": 5,
+          "ry": 2.5
+        },
+        {
+          "x": 52,
+          "y": 17,
+          "rx": 2,
+          "ry": 8
+        }
+      ],
+      "assets": [
+        {
+          "id": "lodge",
+          "name": "黑风口护林站",
+          "kind": "camp",
+          "x": 25,
+          "y": 27
+        },
+        {
+          "id": "village",
+          "name": "风口村",
+          "kind": "village",
+          "x": 41,
+          "y": 30
+        },
+        {
+          "id": "tower",
+          "name": "主瞭望塔",
+          "kind": "tower",
+          "x": 32,
+          "y": 8
+        },
+        {
+          "id": "seedling",
+          "name": "种子园",
+          "kind": "village",
+          "x": 17,
+          "y": 20
+        },
+        {
+          "id": "relay",
+          "name": "应急中继站",
+          "kind": "tower",
+          "x": 51,
+          "y": 13
+        }
+      ],
+      "budget": 180,
+      "durationSec": 420,
+      "fuelMoistureOffset": -0.055,
+      "weather": {
+        "fromDeg": 236,
+        "speed": 7.2,
+        "humidity": 22,
+        "temperature": 34
+      },
+      "windEvents": [
+        {
+          "atSec": 52,
+          "fromDeg": 318,
+          "speed": 14.8,
+          "transitionSec": 6,
+          "warnSec": 16,
+          "label": "黑风槽前缘"
+        },
+        {
+          "atSec": 128,
+          "fromDeg": 168,
+          "speed": 10.2,
+          "transitionSec": 8,
+          "warnSec": 12,
+          "label": "回旋风反向"
+        },
+        {
+          "atSec": 216,
+          "fromDeg": 296,
+          "speed": 16.4,
+          "transitionSec": 5,
+          "warnSec": 15,
+          "label": "主阵风墙抵达"
+        },
+        {
+          "atSec": 312,
+          "fromDeg": 242,
+          "speed": 9.3,
+          "transitionSec": 18,
+          "warnSec": 20,
+          "label": "风场重新组织"
+        },
+        {
+          "atSec": 372,
+          "fromDeg": 190,
+          "speed": 12.7,
+          "transitionSec": 7,
+          "warnSec": 10,
+          "label": "末段回风"
+        }
+      ],
+      "maxBurnedHa": 238,
+      "briefing": "黑风口是全场最不稳定的风区。五处设施散落在主火线两侧，任何一次风向反转都可能让隔离带失效。留出机动预备队。",
+      "objective": "在五次强风变中保住至少四成设施，控制火场面积不超过预案上限。"
+    }
+  ]
+}
